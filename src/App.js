@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { atom, selector } from "recoil";
+import Textinput from "./components/Textinput";
+import CharacterCount from "./components/CharacterCount";
+
+export const textState = atom({
+  key: "textState",
+  default: "",
+});
+
+export const charCountState = selector({
+  key: "charCountState",
+  get: ({ get }) => {
+    const test = get(textState);
+
+    return test.length;
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Textinput />
+      <CharacterCount />
     </div>
   );
 }
